@@ -1,5 +1,5 @@
 # PlaneCNN-Training
-![deep learning module ui image](Resources/Trainer1.png)
+![deep learning module ui image](../Screenshots/PlaneCNNTrainingUI.png)
 ## Overview
 This module offers a user-friendly approach to training sophisticated deep learning models (e.g., ResNet, EfficientNet, CNN, etc.) without requiring any coding. By following a specific data format (explained later), users simply need to provide the input data directory, select a model from the available pool, and click the "Start Trainer" button. Advanced options are available for controlling different training aspects, including checkpointing, cross-validation, loss function, tensorboard logging, and, hyperparameter tuning. Moreover, the module can also be utilized via the command-line interface (CLI) instead of the graphical user interface (GUI).
 

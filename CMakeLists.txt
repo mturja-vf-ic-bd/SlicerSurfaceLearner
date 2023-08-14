@@ -9,7 +9,7 @@ set(EXTENSION_CATEGORY "Examples")
 set(EXTENSION_CONTRIBUTORS "Md Asadullah Turja (UNC Chapel Hill)")
 set(EXTENSION_DESCRIPTION "A Slicer extension to apply convolutional neural network on surface data.")
 set(EXTENSION_ICONURL "http://www.example.com/Slicer/Extensions/SlicerSurfaceLearner.png")
-set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/SlicerSurfaceLearner/Screenshots/1.png")
+set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/SlicerSurfaceLearner/Screenshots/SurfaceLearnerWorkflow.png")
 set(EXTENSION_DEPENDS "NA") # Specified as a list or "NA" if no dependencies
 
 #-----------------------------------------------------------------------------
