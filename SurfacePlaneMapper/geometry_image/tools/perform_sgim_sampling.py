@@ -1,27 +1,10 @@
 from pathlib import Path
-
-import slicer
 import os
 import pickle
 import argparse
 
-try:
-    import numpy as p
-except ImportError:
-    slicer.util.pip_install('numpy==1.20.3')
-
-try:
-    import vtk
-except ImportError:
-    slicer.util.pip_install('vtk==9.0.3')
-
+import numpy as np
 from vtk.util.numpy_support import vtk_to_numpy
-
-try:
-    import PIL
-except ImportError:
-    slicer.util.pip_install('Pillow==8.3.1')
-
 from PIL import Image
 
 from geometry_image.tools.vtk_tools import *

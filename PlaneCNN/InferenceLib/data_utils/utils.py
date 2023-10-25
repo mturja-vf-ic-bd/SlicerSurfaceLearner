@@ -2,7 +2,11 @@ import os
 
 import pandas as pd
 import torch.utils.data
-from monai.transforms import LoadImage, AddChannel, ScaleIntensity, EnsureType, Compose
+from monai.transforms import LoadImage
+from monai.transforms import AddChannel
+from monai.transforms import ScaleIntensity
+from monai.transforms import EnsureType
+from monai.transforms import Compose
 
 from InferenceLib.CONSTANTS import DEFAULT_FILE_PATHS
 from InferenceLib.data_utils.CustomDataset import GeomCnnDataset

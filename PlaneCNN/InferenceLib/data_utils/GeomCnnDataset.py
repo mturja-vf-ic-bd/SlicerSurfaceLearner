@@ -1,22 +1,15 @@
 from typing import Optional
+
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
-
-
-from monai.transforms import (
-    AddChannel,
-    Compose,
-    LoadImage,
-    RandFlip,
-    RandRotate,
-    RandZoom,
-    ScaleIntensity,
-    EnsureType,
-)
+from monai.transforms import AddChannel
+from monai.transforms import Compose
+from monai.transforms import LoadImage
+from monai.transforms import ScaleIntensity
+from monai.transforms import EnsureType
 
 from InferenceLib.data_utils.utils import get_image_files_single_scalar
 from InferenceLib.data_utils.CustomDataset import GeomCnnDataset
-from sklearn.model_selection import train_test_split
 
 
 class GeomCnnDataModule(pl.LightningDataModule):

@@ -1,5 +1,4 @@
 import vtk
-import numpy as np
 
 
 def ReadPolyData(file_name):

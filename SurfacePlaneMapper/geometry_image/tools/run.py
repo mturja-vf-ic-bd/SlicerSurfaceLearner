@@ -1,6 +1,7 @@
+import numpy as np
+
 from SurfacePlaneMapperUtil.Asynchrony import Asynchrony
 from geometry_image.tools.perform_sgim_sampling import *
-from pathlib import Path
 
 
 def run_geom_image(args):

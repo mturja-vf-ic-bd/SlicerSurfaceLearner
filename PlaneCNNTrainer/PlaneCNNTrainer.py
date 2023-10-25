@@ -1,23 +1,25 @@
 import glob
 import os
 import logging
-import vtk, qt, ctk, slicer
-from slicer.ScriptedLoadableModule import *
-from slicer.util import VTKObservationMixin
 from pathlib import Path
 import webbrowser
+
+import vtk
+import qt
+import ctk
+import slicer
+from slicer.ScriptedLoadableModule import *
+from slicer.util import VTKObservationMixin
 from PIL import Image
 
 from DeepLearnerLib.CONSTANTS import DEFAULT_FILE_PATHS
 from DeepLearnerLib.Asynchrony import Asynchrony
 from PlaneCNNTrainerUtil.CheckableComboBox import CheckableComboBox
+from PlaneCNNUtil import ensure_requirements
 
-try:
-    import tensorboard
-except ImportError:
-    slicer.util.pip_install('tensorboard==2.7.0')
-    import tensorboard
+ensure_requirements()
 
+import tensorboard
 from tensorboard import program
 
 

@@ -2,56 +2,22 @@ import logging
 import os.path
 from argparse import ArgumentParser
 
-import slicer
+import pytorch_lightning as pl
+import torch
+import torch.nn
+from monai.networks.nets import EfficientNetBN
+from monai.networks.nets import DenseNet
+from monai.networks.nets import SEResNet50
+from pytorch_lightning.loggers import TensorBoardLogger
+from pytorch_lightning.callbacks import EarlyStopping
+from pytorch_lightning.callbacks import ModelCheckpoint
+from pytorch_lightning.callbacks.progress import ProgressBarBase
 
 from DeepLearnerLib.Asynchrony import Asynchrony
-
-try:
-    import pytorch_lightning as pl
-except ImportError:
-    slicer.util.pip_install('pytorch_lightning==1.4.9')
-    import pytorch_lightning as pl
-
-try:
-    import torch
-except ImportError:
-    slicer.util.pip_install('torch==1.9.0')
-    import torch
-
-try:
-    import monai
-except ImportError:
-    slicer.util.pip_install('monai==0.7.0')
-
-try:
-    import pandas
-except ImportError:
-    slicer.util.pip_install('pandas==1.1.5')
-
-try:
-    import torchmetrics
-except ImportError:
-    slicer.util.pip_install('torchmetrics==0.6.0')
-
-try:
-    import sklearn
-except ImportError:
-    slicer.util.pip_install('scikit-learn==0.24.2')
-
-try:
-    import PIL
-except ImportError:
-    slicer.util.pip_install("Pillow==8.3.1")
-
-import torch.nn
-from monai.networks.nets import EfficientNetBN, DenseNet, SEResNet50
-
 from DeepLearnerLib.models.cnn_model import SimpleCNN
 from DeepLearnerLib.pl_modules.classifier_modules import ImageClassifier
-from DeepLearnerLib.data_utils.GeomCnnDataset import GeomCnnDataModule, GeomCnnDataModuleKFold
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.callbacks.progress import ProgressBarBase
+from DeepLearnerLib.data_utils.GeomCnnDataset import GeomCnnDataModule
+from DeepLearnerLib.data_utils.GeomCnnDataset import GeomCnnDataModuleKFold
 
 
 def weight_reset(m):
