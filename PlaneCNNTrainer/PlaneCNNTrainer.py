@@ -284,7 +284,6 @@ class PlaneCNNTrainerWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                 timepoints = set()
                 counter = {}
                 for sub in os.listdir(self.trainDir):
-                    print(f"sub:{sub}")
                     if not os.path.isdir(os.path.join(self.trainDir, sub)):
                         continue
                     for tp in os.listdir(os.path.join(self.trainDir, sub)):
@@ -300,7 +299,6 @@ class PlaneCNNTrainerWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                             else:
                                 counter[f"{tp}_{feat}"] = 1
                             if self.w is None:
-                                print(f"{self.trainDir}, {sub}, {tp}, {feat}")
                                 rep_file = glob.glob(os.path.join(self.trainDir, sub, tp, feat, f"*.{DEFAULT_FILE_PATHS['FILE_EXT']}"))
                                 if len(rep_file):
                                     self.w = Image.open(rep_file[0]).size
@@ -339,7 +337,6 @@ class PlaneCNNTrainerWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         DEFAULT_FILE_PATHS["TRAIN_DATA_DIR"] = self.InputDirLineEdit.text
         DEFAULT_FILE_PATHS["FEATURE_DIRS"] = self.processInputText(self.modalityComboBox.currentText)
         DEFAULT_FILE_PATHS["TIME_POINTS"] = self.processInputText(self.sessionComboBox.currentText)
-        print(DEFAULT_FILE_PATHS)
         return DEFAULT_FILE_PATHS, True
 
     def checkOutputDirectory(self):
