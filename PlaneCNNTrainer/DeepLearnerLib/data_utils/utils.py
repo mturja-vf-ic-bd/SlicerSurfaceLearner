@@ -14,12 +14,13 @@ def get_image_files_single_scalar(data_dir="TRAIN_DATA_DIR", FILE_PATHS=None):
     labels = []
     if FILE_PATHS is None:
         FILE_PATHS = DEFAULT_FILE_PATHS
+    print(FILE_PATHS)
     subject_ids = sorted(os.listdir(FILE_PATHS[data_dir]))
     scalars = FILE_PATHS["FEATURE_DIRS"]
     time_points = FILE_PATHS["TIME_POINTS"]
     attr = get_attributes(FILE_PATHS)
     print(attr.head())
-    count = {0: 0, 1: 1}
+    count = {0: 0, 1: 0}
     for sub in subject_ids:
         if not os.path.isdir(os.path.join(FILE_PATHS[data_dir], sub)):
             continue

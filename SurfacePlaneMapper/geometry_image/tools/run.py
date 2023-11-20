@@ -3,20 +3,6 @@ from geometry_image.tools.perform_sgim_sampling import *
 from pathlib import Path
 
 
-HOME = "/Users/mturja/PycharmProjects/geometry_image/"
-
-
-def get_command(file, args):
-    input_file, output_file = file
-    command = args["PYTHON_PATH"] + " " + \
-              os.path.join(HOME, "tools", "perform_sgim_sampling.py") + " " \
-              + "-s {} -f {} -r {} -o {}".format(args["template"],
-                                                 input_file,
-                                                 args["resolution"],
-                                                 output_file)
-    return command
-
-
 def run_geom_image(args):
     """
     Run this script to compute geometry image for a set of subjects in a directory
@@ -29,6 +15,7 @@ def run_geom_image(args):
         args["type"],
         args["modalities"]
     )
+    print(filenames)
     total = len(filenames)
     c = 0
     for files in filenames:
@@ -117,13 +104,13 @@ def generate_file_names(
                             input_file = os.path.join(input_directory, sub, t, sc, file)
                             output_file = os.path.join(
                                 output_directory, sub, t, sc,
-                                file.split(".")[0] + "_flat.jpeg")
+                                file.split(".")[0] + "_flat.png")
                             filenames.append((input_file, output_file, sc))
             elif type == "vtk":
                 input_files = [f for f in os.listdir(os.path.join(input_directory, sub, t)) if f.endswith("vtk")]
                 output_files = []
                 for m in modalities:
-                    output_files += [os.path.join(output_directory, sub, t, m, f.split(".")[0] + f"_flat.jpeg")
+                    output_files += [os.path.join(output_directory, sub, t, m, f.split(".")[0] + f"_flat.png")
                                      for f in input_files]
                 sc = list(np.repeat(modalities, len(input_files)))
                 input_files = [os.path.join(input_directory, sub, t, f) for f in input_files] * len(modalities)
@@ -148,7 +135,7 @@ def run_single_subject(args):
                     ):
                 input_file = os.path.join(sub, sc, file)
                 output_file = os.path.join(sub, sc,
-                    file.split(".")[0] + "_flat.jpeg")
+                    file.split(".")[0] + "_flat.png")
                 arguments = {
                     "feature_map": input_file,
                     "output": output_file,
@@ -171,8 +158,6 @@ if __name__ == '__main__':
     parser.add_argument("--scalar", default=None, nargs="?",
                         help="Which scalar to process")
     args = vars(parser.parse_args())
-    args["PYTHON_PATH"] = "/Users/mturja/PycharmProjects/geometry_image/geom_ccn_env/bin/python3"
-    # run_single_subject(args)
     run_geom_image(args)
     print("======= End =======")
 

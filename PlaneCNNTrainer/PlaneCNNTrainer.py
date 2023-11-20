@@ -284,6 +284,7 @@ class PlaneCNNTrainerWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                 timepoints = set()
                 counter = {}
                 for sub in os.listdir(self.trainDir):
+                    print(f"sub:{sub}")
                     if not os.path.isdir(os.path.join(self.trainDir, sub)):
                         continue
                     for tp in os.listdir(os.path.join(self.trainDir, sub)):
@@ -299,8 +300,12 @@ class PlaneCNNTrainerWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                             else:
                                 counter[f"{tp}_{feat}"] = 1
                             if self.w is None:
-                                rep_file = glob.glob(os.path.join(self.trainDir, sub, tp, feat, "*.png"))[0]
-                                self.w = Image.open(rep_file).size
+                                print(f"{self.trainDir}, {sub}, {tp}, {feat}")
+                                rep_file = glob.glob(os.path.join(self.trainDir, sub, tp, feat, f"*.{DEFAULT_FILE_PATHS['FILE_EXT']}"))
+                                if len(rep_file):
+                                    self.w = Image.open(rep_file[0]).size
+                                else:
+                                    self.w = 512  # default image size 512 x 512
                 for f in feat_set:
                     self.modalityComboBox.addItem(f)
                 for tp in timepoints:
