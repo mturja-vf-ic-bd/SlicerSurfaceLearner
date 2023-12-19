@@ -6,7 +6,7 @@ import numpy as np
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 from sklearn.model_selection import StratifiedKFold
-from monai.transforms import AddChannel
+from monai.transforms import EnsureChannelFirst
 from monai.transforms import Compose
 from monai.transforms import LoadImage
 from monai.transforms import RandFlip
@@ -36,7 +36,7 @@ class GeomCnnDataModule(pl.LightningDataModule):
         self.train_transforms = Compose(
             [
                 LoadImage(image_only=True),
-                AddChannel(),
+                EnsureChannelFirst(channel_dim='no_channel'),
                 NormalizeIntensity(),
                 RandRotate(range_x=np.pi / 12, prob=0.5, keep_size=True),
                 RandFlip(spatial_axis=0, prob=0.5),
@@ -45,10 +45,10 @@ class GeomCnnDataModule(pl.LightningDataModule):
             ]
         )
         self.val_transforms = Compose(
-            [LoadImage(image_only=True), AddChannel(), NormalizeIntensity(), EnsureType()]
+            [LoadImage(image_only=True), EnsureChannelFirst(channel_dim='no_channel'), NormalizeIntensity(), EnsureType()]
         )
         self.test_transform = Compose(
-                [LoadImage(image_only=True), AddChannel(), NormalizeIntensity(), EnsureType()]
+                [LoadImage(image_only=True), EnsureChannelFirst(channel_dim='no_channel'), NormalizeIntensity(), EnsureType()]
             )
         self.data_tuple = data_tuple
         self.save_hyperparameters()

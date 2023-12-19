@@ -1,6 +1,6 @@
 requirements = [
     "Pillow",
-    "monai==0.7",
+    "monai>=0.8",
     "pandas",
     "pytorch_lightning",
     "scikit_learn",

@@ -2,7 +2,7 @@ from typing import Optional
 
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
-from monai.transforms import AddChannel
+from monai.transforms import EnsureChannelFirst
 from monai.transforms import Compose
 from monai.transforms import LoadImage
 from monai.transforms import ScaleIntensity
@@ -25,7 +25,7 @@ class GeomCnnDataModule(pl.LightningDataModule):
         self.val_frac = val_frac
         self.FILE_PATHS = file_paths
         self.test_transform = Compose(
-                [LoadImage(image_only=True), AddChannel(), ScaleIntensity(), EnsureType()]
+            [LoadImage(image_only=True), EnsureChannelFirst(channel_dim='no_channel'), ScaleIntensity(), EnsureType()]
             )
         self.data_tuple = data_tuple
         self.save_hyperparameters()
