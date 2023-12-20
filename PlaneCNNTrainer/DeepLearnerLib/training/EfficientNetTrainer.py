@@ -44,11 +44,10 @@ except ImportError:
     slicer.util.pip_install("Pillow==8.3.1")
 
 import torch.nn
-from monai.networks.nets import EfficientNetBN, DenseNet121, DenseNet, SEResNet50
+from monai.networks.nets import EfficientNetBN, DenseNet, SEResNet50
 
 from DeepLearnerLib.models.cnn_model import SimpleCNN
 from DeepLearnerLib.pl_modules.classifier_modules import ImageClassifier
-from DeepLearnerLib.CONSTANTS import DEFAULT_FILE_PATHS
 from DeepLearnerLib.data_utils.GeomCnnDataset import GeomCnnDataModule, GeomCnnDataModuleKFold
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
@@ -126,14 +125,15 @@ def cli_main(args):
     else:
         backbone = SimpleCNN(
             in_channels=args["in_channels"],
-            w=args["w"][0]
+            w=args["w"]
         )
     device = "cuda:0" if torch.cuda.is_available() and args["use_gpu"] else "cpu"
-    model = ImageClassifier(backbone, learning_rate=args["learning_rate"],
-                                criterion=torch.nn.CrossEntropyLoss(
+    model = ImageClassifier(backbone,
+                            learning_rate=args["learning_rate"],
+                            criterion=torch.nn.CrossEntropyLoss(
                                 weight=torch.FloatTensor([1.0, args["pos_weight"]])),
-                                device=device,
-                                metrics=["acc", "precision", "recall"])
+                            device=device,
+                            metrics=["acc", "precision", "recall"])
 
     for i in range(args["n_folds"]):
         # logger
@@ -156,6 +156,7 @@ def cli_main(args):
         # ------------
         # training
         # ------------
+
         trainer = pl.Trainer(max_epochs=args["max_epochs"],
                              gpus=0 if device == "cpu" else 1,
                              log_every_n_steps=5,

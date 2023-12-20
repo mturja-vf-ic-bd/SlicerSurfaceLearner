@@ -19,7 +19,7 @@ def get_image_files_single_scalar(data_dir="TRAIN_DATA_DIR", FILE_PATHS=None):
     time_points = FILE_PATHS["TIME_POINTS"]
     attr = get_attributes(FILE_PATHS)
     print(attr.head())
-    count = {0: 0, 1: 1}
+    count = {0: 0, 1: 0}
     for sub in subject_ids:
         if not os.path.isdir(os.path.join(FILE_PATHS[data_dir], sub)):
             continue
