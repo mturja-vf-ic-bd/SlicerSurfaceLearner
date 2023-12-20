@@ -4,6 +4,16 @@ set(MODULE_NAME PlaneCNN)
 #-----------------------------------------------------------------------------
 set(MODULE_PYTHON_SCRIPTS
   ${MODULE_NAME}.py
+    PlaneCNNUtil/__init__.py
+    PlaneCNNUtil/CheckableComboBox.py
+    InferenceLib/data_utils/__init__.py
+    InferenceLib/data_utils/CustomDataset.py
+    InferenceLib/data_utils/GeomCnnDataset.py
+    InferenceLib/data_utils/utils.py
+    InferenceLib/__init__.py
+    InferenceLib/Asynchrony.py
+    InferenceLib/CONSTANTS.py
+    InferenceLib/logic.py
   )
 
 set(MODULE_PYTHON_RESOURCES

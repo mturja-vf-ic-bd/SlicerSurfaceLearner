@@ -1,9 +1,11 @@
 import os
 import pathlib
-import unittest
 import logging
+import vtk, qt, ctk, slicer
+from slicer.ScriptedLoadableModule import *
+from slicer.util import VTKObservationMixin
 
-from CheckableComboBox import CheckableComboBox
+from PlaneCNNUtil.CheckableComboBox import CheckableComboBox
 
 try:
     import numpy as np
@@ -28,9 +30,6 @@ try:
 except ImportError:
     slicer.util.pip_install('scikit-learn==0.24.2')
 
-import vtk, qt, ctk, slicer
-from slicer.ScriptedLoadableModule import *
-from slicer.util import VTKObservationMixin
 from InferenceLib.CONSTANTS import DEFAULT_FILE_PATHS
 from InferenceLib.Asynchrony import Asynchrony
 
@@ -139,7 +138,8 @@ class PlaneCNNWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         # (in the selected parameter node).
         self.ui.predictPushButton.connect("currentNodeChanged(vtkMRMLNode*)", self.updateParameterNodeFromGUI)
         self.InputDirPushButton.connect("currentNodeChanged(vtkMRMLNode*)", self.updateParameterNodeFromGUI)
-        self.ui.ModelDirPushButton.connect("currentNodeChanged(vtkMRMLNode*)", self.updateParameterNodeFromGUI)
+        self.ui.ModelDirPushButton.connect("currentNodeChanged(vtkMRMLNode*)",
+                                           self.updateParameterNodeFromGUI)
 
         # Buttons
         self.ui.predictPushButton.connect('clicked(bool)', self.onApplyButton)
@@ -227,7 +227,8 @@ class PlaneCNNWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         Called each time the user opens a different module.
         """
         # Do not react to parameter node changes (GUI wlil be updated when the user enters into the module)
-        self.removeObserver(self._parameterNode, vtk.vtkCommand.ModifiedEvent, self.updateGUIFromParameterNode)
+        self.removeObserver(self._parameterNode, vtk.vtkCommand.ModifiedEvent,
+                            self.updateGUIFromParameterNode)
 
     def onSceneStartClose(self, caller, event):
         """
@@ -362,8 +363,8 @@ class InferenceLogic(ScriptedLoadableModuleLogic):
     """
 
     def __init__(
-            self,
-            progressBar):
+        self,
+        progressBar):
         """
         Called when the logic class is instantiated. Can be used for initializing member variables.
         """
@@ -372,10 +373,10 @@ class InferenceLogic(ScriptedLoadableModuleLogic):
         self.progressBar = progressBar
 
     def predict(
-            self,
-            model,
-            data_loader,
-            fold_id=0
+        self,
+        model,
+        data_loader,
+        fold_id=0
     ):
         preds = []
         count = 1
@@ -391,10 +392,10 @@ class InferenceLogic(ScriptedLoadableModuleLogic):
         return preds
 
     def process(
-            self,
-            file_paths,
-            model_path,
-            save_path
+        self,
+        file_paths,
+        model_path,
+        save_path
     ):
         """
         Run the processing algorithm.

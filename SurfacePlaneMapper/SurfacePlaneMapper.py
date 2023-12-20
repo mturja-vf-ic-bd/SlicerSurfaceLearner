@@ -4,11 +4,11 @@ try:
 except ImportError:
     slicer.util.pip_install('scipy==1.7.1')
 
-import vtk, qt, ctk, slicer
+import vtk, qt, slicer
 from slicer.ScriptedLoadableModule import *
 from slicer.util import VTKObservationMixin
 
-from Asynchrony import Asynchrony
+from SurfacePlaneMapperUtil.Asynchrony import Asynchrony
 from geometry_image.tools.run import run_geom_image
 
 

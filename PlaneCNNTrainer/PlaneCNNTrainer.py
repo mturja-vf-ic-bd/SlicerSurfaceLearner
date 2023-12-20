@@ -10,7 +10,7 @@ from PIL import Image
 
 from DeepLearnerLib.CONSTANTS import DEFAULT_FILE_PATHS
 from DeepLearnerLib.Asynchrony import Asynchrony
-from CheckableComboBox import CheckableComboBox
+from PlaneCNNTrainerUtil.CheckableComboBox import CheckableComboBox
 
 try:
     import tensorboard
@@ -104,7 +104,7 @@ class PlaneCNNTrainerWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
         # Load widget from .ui file (created by Qt Designer).
         # Additional widgets can be instantiated manually and added to self.layout.
-        uiWidget = slicer.util.loadUI(self.resourcePath('UI/DeepLearnerLib.ui'))
+        uiWidget = slicer.util.loadUI(self.resourcePath('UI/PlaneCNNTrainer.ui'))
         input_widget = self.modifyUI()
         self.layout.addWidget(input_widget)
         self.layout.addWidget(uiWidget)

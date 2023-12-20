@@ -4,6 +4,13 @@ set(MODULE_NAME SurfacePlaneMapper)
 #-----------------------------------------------------------------------------
 set(MODULE_PYTHON_SCRIPTS
   ${MODULE_NAME}.py
+    geometry_image/Sphere_Template/__init__.py
+    geometry_image/tools/__init__.py
+    geometry_image/tools/perform_sgim_sampling.py
+    geometry_image/tools/run.py
+    geometry_image/tools/vtk_tools.py
+    SurfacePlaneMapperUtil/__init__.py
+    SurfacePlaneMapperUtil/Asynchrony.py
   )
 
 set(MODULE_PYTHON_RESOURCES
