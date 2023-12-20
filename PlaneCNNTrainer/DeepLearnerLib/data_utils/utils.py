@@ -1,9 +1,12 @@
 import os
 
-import numpy as np
 import pandas as pd
 import torch.utils.data
-from monai.transforms import LoadImage, AddChannel, ScaleIntensity, EnsureType, Compose
+from monai.transforms import LoadImage
+from monai.transforms import EnsureChannelFirst
+from monai.transforms import ScaleIntensity
+from monai.transforms import EnsureType
+from monai.transforms import Compose
 
 from DeepLearnerLib.CONSTANTS import DEFAULT_FILE_PATHS
 from DeepLearnerLib.data_utils.CustomDataset import GeomCnnDataset
@@ -52,7 +55,7 @@ def get_test_dataloader():
     test_files, test_labels = get_image_files_single_scalar("TEST_DATA_DIR")
     test_transform = Compose(
         [LoadImage(image_only=True),
-         AddChannel(),
+         EnsureChannelFirst(channel_dim='no_channel'),
          ScaleIntensity(),
          EnsureType()]
     )

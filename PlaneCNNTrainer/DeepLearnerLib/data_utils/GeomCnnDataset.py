@@ -1,28 +1,23 @@
 from typing import Optional
+import logging
+from operator import itemgetter
+
 import numpy as np
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
-import logging
 from sklearn.model_selection import StratifiedKFold
-from operator import itemgetter
-
-
-from monai.transforms import (
-    AddChannel,
-    Compose,
-    LoadImage,
-    RandFlip,
-    RandRotate,
-    RandZoom,
-    ScaleIntensity,
-    NormalizeIntensity,
-    EnsureType,
-)
+from monai.transforms import EnsureChannelFirst
+from monai.transforms import Compose
+from monai.transforms import LoadImage
+from monai.transforms import RandFlip
+from monai.transforms import RandRotate
+from monai.transforms import RandZoom
+from monai.transforms import NormalizeIntensity
+from monai.transforms import EnsureType
+from sklearn.model_selection import train_test_split
 
 from DeepLearnerLib.data_utils.utils import get_image_files_single_scalar
 from DeepLearnerLib.data_utils.CustomDataset import GeomCnnDataset
-from sklearn.model_selection import train_test_split
-from PIL import Image
 
 
 class GeomCnnDataModule(pl.LightningDataModule):
@@ -41,7 +36,7 @@ class GeomCnnDataModule(pl.LightningDataModule):
         self.train_transforms = Compose(
             [
                 LoadImage(image_only=True),
-                AddChannel(),
+                EnsureChannelFirst(channel_dim='no_channel'),
                 NormalizeIntensity(),
                 RandRotate(range_x=np.pi / 12, prob=0.5, keep_size=True),
                 RandFlip(spatial_axis=0, prob=0.5),
@@ -50,10 +45,10 @@ class GeomCnnDataModule(pl.LightningDataModule):
             ]
         )
         self.val_transforms = Compose(
-            [LoadImage(image_only=True), AddChannel(), NormalizeIntensity(), EnsureType()]
+            [LoadImage(image_only=True), EnsureChannelFirst(channel_dim='no_channel'), NormalizeIntensity(), EnsureType()]
         )
         self.test_transform = Compose(
-                [LoadImage(image_only=True), AddChannel(), NormalizeIntensity(), EnsureType()]
+                [LoadImage(image_only=True), EnsureChannelFirst(channel_dim='no_channel'), NormalizeIntensity(), EnsureType()]
             )
         self.data_tuple = data_tuple
         self.save_hyperparameters()

@@ -1,4 +1,6 @@
-from qt import QApplication, QComboBox, QMainWindow, QWidget, QVBoxLayout, QStandardItemModel, Qt
+from qt import QComboBox
+from qt import QStandardItemModel
+from qt import Qt
 
 
 # creating checkable combo box class

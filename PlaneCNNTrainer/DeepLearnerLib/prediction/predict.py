@@ -1,8 +1,5 @@
-import pytorch_lightning as pl
-import torch
 import torchmetrics
 
-from DeepLearnerLib.data_utils.GeomCnnDataset import GeomCnnDataModule
 from DeepLearnerLib.data_utils.utils import get_test_dataloader
 from DeepLearnerLib.pl_modules.classifier_modules import ImageClassifier
 

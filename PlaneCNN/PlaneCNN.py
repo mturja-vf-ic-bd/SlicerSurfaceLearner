@@ -1,34 +1,22 @@
 import os
 import pathlib
 import logging
-import vtk, qt, ctk, slicer
+
+import vtk
+import qt
+import ctk
+import slicer
 from slicer.ScriptedLoadableModule import *
 from slicer.util import VTKObservationMixin
 
 from PlaneCNNUtil.CheckableComboBox import CheckableComboBox
+from PlaneCNNUtil import ensure_requirements
 
-try:
-    import numpy as np
-except ImportError:
-    slicer.util.pip_install('numpy==1.21.2')
-    import numpy as np
+ensure_requirements()
 
-try:
-    import torch
-except ImportError:
-    slicer.util.pip_install('torch==1.9.0')
-    import torch
+import numpy as np
 
-try:
-    import pytorch_lightning as pl
-except ImportError:
-    slicer.util.pip_install('pytorch_lightning==1.4.9')
-    import pytorch_lightning as pl
-
-try:
-    import sklearn
-except ImportError:
-    slicer.util.pip_install('scikit-learn==0.24.2')
+import torch
 
 from InferenceLib.CONSTANTS import DEFAULT_FILE_PATHS
 from InferenceLib.Asynchrony import Asynchrony

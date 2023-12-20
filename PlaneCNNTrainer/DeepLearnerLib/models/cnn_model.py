@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 
 from monai.networks.blocks import Convolution
