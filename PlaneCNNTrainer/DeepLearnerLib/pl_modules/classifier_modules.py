@@ -14,7 +14,7 @@ class ImageClassifier(pl.LightningModule):
                  metrics=["acc"],
                  device="cpu"):
         super(ImageClassifier, self).__init__()
-        self.save_hyperparameters()
+        self.save_hyperparameters(ignore=['backbone', 'criterion'])
         self.backbone = backbone
         self.criterion = criterion
         self.train_metrics = {}
@@ -22,17 +22,17 @@ class ImageClassifier(pl.LightningModule):
         self.metric_names = metrics
         for m in metrics:
             if m == "acc":
-                train_metric = torchmetrics.Accuracy().to(device)
-                val_metric = torchmetrics.Accuracy().to(device)
+                train_metric = torchmetrics.Accuracy(task="binary").to(device)
+                val_metric = torchmetrics.Accuracy(task="binary").to(device)
             elif m == "auc":
-                train_metric = torchmetrics.AUROC(pos_label=1).to(device)
-                val_metric = torchmetrics.AUROC(pos_label=1).to(device)
+                train_metric = torchmetrics.AUROC(pos_label=1, task="binary").to(device)
+                val_metric = torchmetrics.AUROC(pos_label=1, task="binary").to(device)
             elif m == "precision":
-                train_metric = torchmetrics.Precision().to(device)
-                val_metric = torchmetrics.Precision().to(device)
+                train_metric = torchmetrics.Precision(task="binary").to(device)
+                val_metric = torchmetrics.Precision(task="binary").to(device)
             elif m == "recall":
-                train_metric = torchmetrics.Recall().to(device)
-                val_metric = torchmetrics.Recall().to(device)
+                train_metric = torchmetrics.Recall(task="binary").to(device)
+                val_metric = torchmetrics.Recall(task="binary").to(device)
             self.train_metrics[m] = train_metric
             self.val_metrics[m] = val_metric
 
@@ -54,13 +54,13 @@ class ImageClassifier(pl.LightningModule):
                 self.val_metrics[m](y_hat, y)
         return loss
 
-    def training_epoch_end(self, outputs):
+    def on_train_epoch_end(self):
         # update and log
         for m in self.metric_names:
             self.log(f"train/{m}", self.train_metrics[m].compute())
             self.train_metrics[m].reset()
 
-    def validation_epoch_end(self, outputs):
+    def on_validation_epoch_end(self):
         # update and log
         for m in self.metric_names:
             self.log(f"validation/{m}", self.val_metrics[m].compute())

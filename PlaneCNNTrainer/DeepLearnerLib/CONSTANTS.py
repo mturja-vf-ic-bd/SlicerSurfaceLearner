@@ -6,7 +6,7 @@ PREFIX = pathlib.Path.home()
 
 DEFAULT_FILE_PATHS = {
     "BASE_DIR": os.path.join(PREFIX, "SlicerSurfaceLearner"),
-    "TRAIN_DATA_DIR": os.path.join(PREFIX, "surface_data_train"),
+    "TRAIN_DATA_DIR": os.path.join(PREFIX, "SurfaceDataSimulatedSphere"),
     "TEST_DATA_DIR": os.path.join(PREFIX, "surface_data_test"),
     "FEATURE_DIRS": ["eacsf"],
     "FILE_SUFFIX": ["_flat", "_flat"],

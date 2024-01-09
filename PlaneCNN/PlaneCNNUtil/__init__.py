@@ -2,11 +2,11 @@ requirements = [
     "Pillow",
     "monai>=0.8",
     "pandas",
-    "pytorch_lightning",
+    "pytorch_lightning>=2.1.0",
     "scikit_learn",
     "tensorboard",
-    "torch",
-    "torchmetrics",
+    "torch>=2.0.0",
+    "torchmetrics>=1.2.1",
 ]
 
 

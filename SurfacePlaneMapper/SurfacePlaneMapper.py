@@ -6,9 +6,6 @@ import slicer
 from slicer.ScriptedLoadableModule import *
 from slicer.util import VTKObservationMixin
 
-from PlaneCNNUtil import ensure_requirements
-
-ensure_requirements()
 
 from SurfacePlaneMapperUtil.Asynchrony import Asynchrony
 from geometry_image.tools.run import run_geom_image

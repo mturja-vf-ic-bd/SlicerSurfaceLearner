@@ -17,6 +17,7 @@ def get_image_files_single_scalar(data_dir="TRAIN_DATA_DIR", FILE_PATHS=None):
     labels = []
     if FILE_PATHS is None:
         FILE_PATHS = DEFAULT_FILE_PATHS
+    print(FILE_PATHS)
     subject_ids = sorted(os.listdir(FILE_PATHS[data_dir]))
     scalars = FILE_PATHS["FEATURE_DIRS"]
     time_points = FILE_PATHS["TIME_POINTS"]
