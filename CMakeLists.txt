@@ -5,11 +5,11 @@ project(SlicerSurfaceLearner)
 #-----------------------------------------------------------------------------
 # Extension meta-information
 set(EXTENSION_HOMEPAGE "https://www.slicer.org/wiki/Documentation/Nightly/Extensions/SlicerSurfaceLearner")
-set(EXTENSION_CATEGORY "Examples")
+set(EXTENSION_CATEGORY "SurfaceLearner")
 set(EXTENSION_CONTRIBUTORS "Md Asadullah Turja (UNC Chapel Hill)")
 set(EXTENSION_DESCRIPTION "A Slicer extension to apply convolutional neural network on surface data.")
-set(EXTENSION_ICONURL "http://www.example.com/Slicer/Extensions/SlicerSurfaceLearner.png")
-set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/SlicerSurfaceLearner/Screenshots/SurfaceLearnerWorkflow.png")
+set(EXTENSION_ICONURL "https://raw.githubusercontent.com/mturja-vf-ic-bd/SlicerSurfaceLearner/main/SlicerSurfaceLearner.png")
+set(EXTENSION_SCREENSHOTURLS "https://raw.githubusercontent.com/mturja-vf-ic-bd/SlicerSurfaceLearner/main/SurfaceLearnerWorkflow.png")
 set(EXTENSION_DEPENDS "NA") # Specified as a list or "NA" if no dependencies
 
 #-----------------------------------------------------------------------------
